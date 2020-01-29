@@ -256,7 +256,7 @@ class Chart {
 			me.platform = new config.platform();
 		} else if (!isDomSupported()) {
 			me.platform = new BasicPlatform();
-		} else if (window.OffscreenCanvas && canvas instanceof window.OffscreenCanvas) {
+		} else if (typeof OffscreenCanvas !== undefined && canvas instanceof OffscreenCanvas) {
 			me.platform = new BasicPlatform();
 		} else {
 			me.platform = new DomPlatform();
@@ -294,8 +294,10 @@ class Chart {
 
 		canvas.width = me.width = newWidth;
 		canvas.height = me.height = newHeight;
-		canvas.style.width = newWidth + 'px';
-		canvas.style.height = newHeight + 'px';
+		if (canvas.style) {
+			canvas.style.width = newWidth + 'px';
+			canvas.style.height = newHeight + 'px';
+		}
 
 		helpers.dom.retinaScale(me, newRatio);
 
