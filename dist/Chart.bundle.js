@@ -1,7 +1,7 @@
 /*!
  * Chart.js v2.9.3
  * https://www.chartjs.org
- * (c) 2019 Chart.js Contributors
+ * (c) 2020 Chart.js Contributors
  * Released under the MIT License
  */
 (function (global, factory) {
@@ -9417,8 +9417,10 @@ helpers$1.extend(Chart.prototype, /** @lends Chart */ {
 
 		canvas.width = me.width = newWidth;
 		canvas.height = me.height = newHeight;
-		canvas.style.width = newWidth + 'px';
-		canvas.style.height = newHeight + 'px';
+		if (canvas.style) {
+			canvas.style.width = newWidth + 'px';
+			canvas.style.height = newHeight + 'px';
+		}
 
 		helpers$1.retinaScale(me, options.devicePixelRatio);
 
@@ -10749,7 +10751,7 @@ var core_helpers = function() {
 	helpers$1.getMaximumWidth = function(domNode) {
 		var container = helpers$1._getParentNode(domNode);
 		if (!container) {
-			return domNode.clientWidth;
+			return domNode.clientWidth || domNode.width;
 		}
 
 		var clientWidth = container.clientWidth;
@@ -10763,7 +10765,7 @@ var core_helpers = function() {
 	helpers$1.getMaximumHeight = function(domNode) {
 		var container = helpers$1._getParentNode(domNode);
 		if (!container) {
-			return domNode.clientHeight;
+			return domNode.clientHeight || domNode.height;
 		}
 
 		var clientHeight = container.clientHeight;

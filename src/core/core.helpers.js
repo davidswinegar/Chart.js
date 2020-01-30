@@ -471,7 +471,7 @@ module.exports = function() {
 	helpers.getMaximumWidth = function(domNode) {
 		var container = helpers._getParentNode(domNode);
 		if (!container) {
-			return domNode.clientWidth;
+			return domNode.clientWidth || domNode.width;
 		}
 
 		var clientWidth = container.clientWidth;
@@ -485,7 +485,7 @@ module.exports = function() {
 	helpers.getMaximumHeight = function(domNode) {
 		var container = helpers._getParentNode(domNode);
 		if (!container) {
-			return domNode.clientHeight;
+			return domNode.clientHeight || domNode.height;
 		}
 
 		var clientHeight = container.clientHeight;
